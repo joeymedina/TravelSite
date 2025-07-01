@@ -19,9 +19,20 @@ export default function TripList() {
       <div className="space-y-4">
         {trips.map(trip => (
           <div key={trip.id} className="border rounded-lg p-4 shadow-sm">
-            <h2 className="text-xl font-semibold"><Link to={`/trip/${trip.id}`} className="text-blue-600 hover:underline">{trip.title}</Link></h2>
+            <div className="flex justify-between items-center">
+              <h2 className="text-xl font-semibold">
+                <Link to={`/trip/${trip.id}`} className="text-blue-600 hover:underline">
+                  {trip.title}
+                </Link>
+              </h2>
+              <Link to={`/trip/${trip.id}/edit`} className="text-sm text-blue-500 hover:underline">
+                Edit
+              </Link>
+            </div>
             <p className="text-gray-300">{trip.location}</p>
-            <p className="text-sm text-gray-500">{new Date(trip.startDate).toLocaleDateString()} – {new Date(trip.endDate).toLocaleDateString()}</p>
+            <p className="text-sm text-gray-500">
+              {new Date(trip.startDate).toLocaleDateString()} – {new Date(trip.endDate).toLocaleDateString()}
+            </p>
             <p className="mt-2 text-gray-100">{trip.story}</p>
           </div>
         ))}

@@ -19,7 +19,9 @@ export default function CreateTrip() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-6 bg-white rounded shadow-md">
+     <div className="w-full px-4 sm:px-8 flex justify-center">
+
+    <form onSubmit={handleSubmit} className="w-[40vw] max-w-5xl p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-gray-500 text-2xl font-semibold mb-6 text-center">Create New Trip</h2>
 
       <label className="text-gray-500 block mb-1 font-medium" htmlFor="title">Title</label>
@@ -85,5 +87,6 @@ export default function CreateTrip() {
         Create Trip
       </button>
     </form>
+    </div>
   );
 }
