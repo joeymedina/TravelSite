@@ -3,7 +3,7 @@ import CreateTrip from "./pages/CreateTrip";
 import ViewTrip from "./pages/ViewTrip";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import EditTrip from "./pages/EditTrip";
-
+import { ToastContainer } from "react-toastify";
 function App() {
   const location = useLocation();
 
@@ -25,7 +25,9 @@ function App() {
         <Route path="/new" element={<CreateTrip />} />
         <Route path="/trip/:id" element={<ViewTrip />} />
         <Route path="/trip/:id/edit" element={<EditTrip />} />
-      </Routes>
+\      </Routes>
+      <ToastContainer position="bottom-center" autoClose={3000} aria-label={undefined} />
+
     </div>
   );
 }

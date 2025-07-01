@@ -1,16 +1,26 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
 import type { Trip } from '../types/types';
+import DeleteTrip from './DeleteTripModal';
+import { toast } from 'react-toastify';
 
 export default function ViewTrip() {
   const { id } = useParams();
   const [trip, setTrip] = useState<Trip | null>(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!id) return;
     api.get<Trip>(`/trips/${id}`).then(res => setTrip(res.data));
   }, [id]);
+
+const handleDeleted = () => {
+    setShowDeleteModal(false);
+    toast.success('Trip deleted');
+    navigate('/');
+  };
 
   if (!trip) return <div className="text-center mt-10">Loading...</div>;
 
@@ -30,6 +40,19 @@ export default function ViewTrip() {
           </div>
         ))}
       </div>
+            <button className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+        onClick={() => setShowDeleteModal(true)}>
+        Delete Trip
+      </button>
+
+      {showDeleteModal && (
+        <DeleteTrip
+          id={trip.id}
+          title={trip.title}
+          onClose={() => setShowDeleteModal(false)}
+          onDeleted={handleDeleted}
+        />
+      )}
     </div>
   );
 }
